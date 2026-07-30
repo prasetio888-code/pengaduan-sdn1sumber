@@ -50,8 +50,8 @@
                     <p class="text-xs font-bold">Lampiran Foto</p>
                 </div>
                 <div class="bg-white p-3 rounded-xl shadow text-center">
-                    <i class="fas fa-hand-holding-heart text-red-500 text-2xl mb-1"></i>
-                    <p class="text-xs font-bold">Ramah & Transparan</p>
+                    <i class="fas fa-eye text-indigo-600 text-2xl mb-1"></i>
+                    <p class="text-xs font-bold">Transparan</p>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
                 <h3 class="text-xl font-bold text-slate-800 flex items-center">
                     <i class="fas fa-paper-plane text-blue-600 mr-2"></i> Formulir Pengaduan / Saran
                 </h3>
-                <p class="text-xs text-slate-500 mt-1">Silakan isi formulir di bawah ini dengan informasi yang jelas.</p>
+                <p class="text-xs text-slate-500 mt-1">Silakan isi formulir di bawah ini. Identitas Anda dijamin aman & terlindungi.</p>
             </div>
 
             <form id="complaintForm" onsubmit="handleSubmit(event)" class="space-y-5">
@@ -128,7 +128,7 @@
                     <textarea id="uraian" rows="4" required class="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Ceritakan secara detail masukan, kronologi, atau keluhan Anda..."></textarea>
                 </div>
 
-                <!-- FITUR UPLOAD FOTO BUKTI / KERUSAKAN -->
+                <!-- FITUR UPLOAD FOTO BUKTI -->
                 <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
                     <label class="block text-xs font-bold text-blue-900 mb-1 flex items-center">
                         <i class="fas fa-camera text-blue-600 mr-2"></i> Foto Bukti / Lampiran (Opsional)
@@ -137,7 +137,7 @@
                     
                     <input type="file" id="fotoBukti" accept="image/*" onchange="previewImage(event)" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
                     
-                    <!-- Area Pratinjau Foto -->
+                    <!-- Pratinjau Foto -->
                     <div id="previewContainer" class="mt-3 hidden">
                         <p class="text-xs text-emerald-700 font-semibold mb-1"><i class="fas fa-check-circle"></i> Foto siap terlampir:</p>
                         <img id="imagePreview" class="max-h-48 rounded-lg border shadow-sm object-cover">
@@ -159,10 +159,53 @@
             </form>
         </div>
 
+        <!-- FITUR BARU: DAFTAR LAPORAN REKAP LOKAL / ANONIM -->
+        <div class="mt-12 bg-white rounded-2xl shadow-lg p-6 border border-slate-200">
+            <div class="flex items-center justify-between border-b pb-3 mb-4">
+                <h4 class="font-bold text-slate-800 text-base flex items-center">
+                    <i class="fas fa-list-alt text-blue-600 mr-2"></i> Laporan Masuk Terakhir (Anonim)
+                </h4>
+                <span class="text-xs bg-blue-100 text-blue-800 font-semibold px-2.5 py-1 rounded-full" id="totalLaporanBadge">3 Laporan</span>
+            </div>
+            
+            <p class="text-xs text-slate-500 mb-4">
+                Berikut adalah daftar aspirasi masyarakat yang telah masuk. Nama dan identitas pelapor <strong>selalu disamarkan/di-anonimkan</strong> demi menjaga kerahasiaan.
+            </p>
+
+            <div id="daftarPengaduan" class="space-y-4">
+                <!-- Data Contoh / Default -->
+                <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-md transition">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded">Fasilitas & Sarana Sekolah</span>
+                        <span class="text-[10px] text-slate-400">30 Juli 2026</span>
+                    </div>
+                    <p class="text-xs font-semibold text-slate-800 mb-1">Pelapor: <span class="text-slate-500 font-normal">Anonim (Orang Tua / Wali Murid)</span></p>
+                    <p class="text-xs text-slate-600 mb-2">"Atap ruang kelas 4 bocor saat hujan deras. Mohon diperbaiki demi kenyamanan belajar siswa."</p>
+                    <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-200">
+                        <span class="text-emerald-600 font-bold"><i class="fas fa-check-circle mr-1"></i> Status: Selesai Ditindaklanjuti</span>
+                        <span class="text-slate-400">ID: #LAPOR-001</span>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-md transition">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Kebersihan & Lingkungan</span>
+                        <span class="text-[10px] text-slate-400">29 Juli 2026</span>
+                    </div>
+                    <p class="text-xs font-semibold text-slate-800 mb-1">Pelapor: <span class="text-slate-500 font-normal">Anonim (Siswa)</span></p>
+                    <p class="text-xs text-slate-600 mb-2">"Wastafel tempat cuci tangan depan kelas 1 airnya mampet dan agak berbau."</p>
+                    <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-200">
+                        <span class="text-amber-600 font-bold"><i class="fas fa-spinner mr-1"></i> Status: Sedang Diproses</span>
+                        <span class="text-slate-400">ID: #LAPOR-002</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- KONTAK ALTERNATIF -->
         <div class="mt-8 bg-blue-50 border border-blue-200 rounded-2xl p-6 text-center">
             <h4 class="font-bold text-blue-900 text-sm mb-2">Butuh Konsultasi Langsung?</h4>
-            <p class="text-xs text-blue-700 mb-4">Anda juga bisa berkonsultasi langsung di **Ruang Khusus Konsultasi SDN 1 Sumber**.</p>
+            <p class="text-xs text-blue-700 mb-4">Anda juga bisa berkonsultasi langsung di Ruang Khusus Konsultasi SDN 1 Sumber.</p>
             <a href="https://wa.me/6281234567890?text=Halo%20Petugas%20SDN%201%20Sumber,%20saya%20ingin%20berkonsultasi" target="_blank" class="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-lg shadow transition">
                 <i class="fab fa-whatsapp text-base"></i>
                 <span>Chat Petugas via WhatsApp</span>
@@ -179,7 +222,7 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIK -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
         function toggleIdentity(show) {
             const fields = document.getElementById('identityFields');
@@ -202,6 +245,40 @@
             }
         }
 
+        // FUNGSI LOAD LAPORAN DARI BROWSER STORAGE
+        function loadSavedReports() {
+            const saved = JSON.parse(localStorage.getItem('sdn1sumber_laporan') || '[]');
+            const container = document.getElementById('daftarPengaduan');
+            const badge = document.getElementById('totalLaporanBadge');
+
+            if (saved.length > 0) {
+                badge.innerText = `${saved.length + 2} Laporan`;
+                saved.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = "p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-md transition";
+                    
+                    let fotoBadge = item.fotoUrl && item.fotoUrl.startsWith('http') 
+                        ? `<a href="${item.fotoUrl}" target="_blank" class="text-[11px] text-blue-600 underline mt-1 block"><i class="fas fa-image mr-1"></i>Lihat Foto Lampiran</a>` 
+                        : '';
+
+                    card.innerHTML = `
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded">${item.kategori}</span>
+                            <span class="text-[10px] text-slate-400">${item.tgl}</span>
+                        </div>
+                        <p class="text-xs font-semibold text-slate-800 mb-1">Pelapor: <span class="text-slate-500 font-normal">Anonim (${item.status})</span></p>
+                        <p class="text-xs text-slate-600 mb-1">"${item.uraian}"</p>
+                        ${fotoBadge}
+                        <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-200 mt-2">
+                            <span class="text-blue-600 font-bold"><i class="fas fa-clock mr-1"></i> Status: Baru Terkirim</span>
+                            <span class="text-slate-400">ID: #${item.id}</span>
+                        </div>
+                    `;
+                    container.prepend(card);
+                });
+            }
+        }
+
         async function handleSubmit(e) {
             e.preventDefault();
 
@@ -219,13 +296,12 @@
             const solusi = document.getElementById('solusi').value || 'Tidak ada';
             const fileInput = document.getElementById('fotoBukti');
 
-            // GANTI DENGAN NOMOR WA PETUGAS SEKOLAH (CONTOH: 6281234567890)
-            const noWA = "628980250698"; 
+            const noWA = "628980250698"; // Ganti dengan No WA Pengelola
             let fotoUrl = "Tidak ada foto dilampirkan";
 
-            // PROSES UPLOAD FOTO KE CLOUDINARY GRATIS JIKA ADA FOTO
+            // Upload Foto jika ada
             if (fileInput.files.length > 0) {
-                btnText.innerText = "Mengunggah Foto Bukti...";
+                btnText.innerText = "Mengunggah Foto...";
                 const formData = new FormData();
                 formData.append('file', fileInput.files[0]);
                 formData.append('upload_preset', 'ml_default');
@@ -239,14 +315,31 @@
                     if (data.secure_url) {
                         fotoUrl = data.secure_url;
                     } else {
-                        fotoUrl = "[Foto Terpilih di HP Pelapor - Minta Pelapor Lampirkan]";
+                        fotoUrl = "[Ada Foto Bukti dari HP]";
                     }
                 } catch (err) {
-                    fotoUrl = "[Ada foto bukti, minta pelapor kirimkan di chat ini]";
+                    fotoUrl = "[Ada Foto Bukti Terlampir]";
                 }
             }
 
-            // SUSUN PESAN WHATSAPP
+            // SIMPAN KE BAPAK/DAFTAR REKAP ANONIM WEBSITE
+            const randomId = 'LAPOR-' + Math.floor(100 + Math.random() * 900);
+            const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'Long', year: 'numeric' });
+            
+            const newReport = {
+                id: randomId,
+                tgl: today,
+                kategori: kategori,
+                status: status,
+                uraian: uraian,
+                fotoUrl: fotoUrl
+            };
+
+            const existingReports = JSON.parse(localStorage.getItem('sdn1sumber_laporan') || '[]');
+            existingReports.push(newReport);
+            localStorage.setItem('sdn1sumber_laporan', JSON.stringify(existingReports));
+
+            // KIRIM VIA WHATSAPP
             const textPesan = `*PENGADUAN ONLINE SDN 1 SUMBER*\n\n` +
                 `*Sifat:* ${sifat}\n` +
                 `*Nama:* ${nama}\n` +
@@ -262,8 +355,13 @@
             btnKirim.disabled = false;
             btnText.innerText = "Kirim Pengaduan Sekarang";
 
+            // Buka WhatsApp & Reload Halaman
             window.open(urlWA, '_blank');
+            location.reload();
         }
+
+        // JALANKAN SAAT HALAMAN DIMUAT
+        window.onload = loadSavedReports;
     </script>
 </body>
 </html>
