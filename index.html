@@ -128,7 +128,7 @@
                     <textarea id="uraian" rows="4" required class="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Ceritakan secara detail masukan, kronologi, atau keluhan Anda..."></textarea>
                 </div>
 
-                <!-- FITUR UPLOAD FOTO BUKTI -->
+                <!-- UPLOAD FOTO BUKTI -->
                 <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
                     <label class="block text-xs font-bold text-blue-900 mb-1 flex items-center">
                         <i class="fas fa-camera text-blue-600 mr-2"></i> Foto Bukti / Lampiran (Opsional)
@@ -159,13 +159,13 @@
             </form>
         </div>
 
-        <!-- FITUR BARU: DAFTAR LAPORAN REKAP LOKAL / ANONIM -->
+        <!-- DAFTAR LAPORAN REKAP ANONIM -->
         <div class="mt-12 bg-white rounded-2xl shadow-lg p-6 border border-slate-200">
             <div class="flex items-center justify-between border-b pb-3 mb-4">
                 <h4 class="font-bold text-slate-800 text-base flex items-center">
                     <i class="fas fa-list-alt text-blue-600 mr-2"></i> Laporan Masuk Terakhir (Anonim)
                 </h4>
-                <span class="text-xs bg-blue-100 text-blue-800 font-semibold px-2.5 py-1 rounded-full" id="totalLaporanBadge">3 Laporan</span>
+                <span class="text-xs bg-blue-100 text-blue-800 font-semibold px-2.5 py-1 rounded-full" id="totalLaporanBadge">2 Laporan</span>
             </div>
             
             <p class="text-xs text-slate-500 mb-4">
@@ -173,7 +173,6 @@
             </p>
 
             <div id="daftarPengaduan" class="space-y-4">
-                <!-- Data Contoh / Default -->
                 <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-md transition">
                     <div class="flex justify-between items-start mb-2">
                         <span class="text-xs font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded">Fasilitas & Sarana Sekolah</span>
@@ -202,11 +201,21 @@
             </div>
         </div>
 
-        <!-- KONTAK ALTERNATIF -->
-        <div class="mt-8 bg-blue-50 border border-blue-200 rounded-2xl p-6 text-center">
+        <!-- BARCODE / QR CODE INTEGRATED -->
+        <div class="mt-8 bg-white border border-slate-200 rounded-2xl p-6 text-center shadow-sm">
+            <h4 class="font-bold text-slate-800 text-sm mb-1">Scan QR Code Pengaduan</h4>
+            <p class="text-xs text-slate-500 mb-3">Pindai kode di bawah ini menggunakan kamera HP untuk membuka laman ini dengan cepat:</p>
+            <div class="inline-block p-2 bg-white rounded-xl border border-slate-200 shadow-inner">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://prasetio888-code.github.io/pengaduan-sdn1sumber/" alt="QR Code Pengaduan SDN 1 Sumber" class="w-40 h-40 mx-auto rounded-lg">
+            </div>
+            <p class="text-[11px] text-slate-400 mt-2">`https://prasetio888-code.github.io/pengaduan-sdn1sumber/`</p>
+        </div>
+
+        <!-- KONTAK ALTERNATIF WA PENGELOLA -->
+        <div class="mt-6 bg-blue-50 border border-blue-200 rounded-2xl p-6 text-center">
             <h4 class="font-bold text-blue-900 text-sm mb-2">Butuh Konsultasi Langsung?</h4>
             <p class="text-xs text-blue-700 mb-4">Anda juga bisa berkonsultasi langsung di Ruang Khusus Konsultasi SDN 1 Sumber.</p>
-            <a href="https://wa.me/6281234567890?text=Halo%20Petugas%20SDN%201%20Sumber,%20saya%20ingin%20berkonsultasi" target="_blank" class="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-lg shadow transition">
+            <a href="https://wa.me/628980250698?text=Halo%20Petugas%20SDN%201%20Sumber,%20saya%20ingin%20berkonsultasi" target="_blank" class="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-lg shadow transition">
                 <i class="fab fa-whatsapp text-base"></i>
                 <span>Chat Petugas via WhatsApp</span>
             </a>
@@ -245,7 +254,6 @@
             }
         }
 
-        // FUNGSI LOAD LAPORAN DARI BROWSER STORAGE
         function loadSavedReports() {
             const saved = JSON.parse(localStorage.getItem('sdn1sumber_laporan') || '[]');
             const container = document.getElementById('daftarPengaduan');
@@ -296,7 +304,8 @@
             const solusi = document.getElementById('solusi').value || 'Tidak ada';
             const fileInput = document.getElementById('fotoBukti');
 
-            const noWA = "628980250698"; // Ganti dengan No WA Pengelola
+            // NOMOR WA RESMI PENGELOLA SDN 1 SUMBER
+            const noWA = "628980250698"; 
             let fotoUrl = "Tidak ada foto dilampirkan";
 
             // Upload Foto jika ada
@@ -322,9 +331,9 @@
                 }
             }
 
-            // SIMPAN KE BAPAK/DAFTAR REKAP ANONIM WEBSITE
+            // SIMPAN KE REKAP ANONIM LOKAL
             const randomId = 'LAPOR-' + Math.floor(100 + Math.random() * 900);
-            const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'Long', year: 'numeric' });
+            const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
             
             const newReport = {
                 id: randomId,
@@ -360,12 +369,7 @@
             location.reload();
         }
 
-        // JALANKAN SAAT HALAMAN DIMUAT
         window.onload = loadSavedReports;
     </script>
-</body>
-</html>
-    window.open(urlWA, '_blank');
-}
 </body>
 </html>
