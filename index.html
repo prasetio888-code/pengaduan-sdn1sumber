@@ -164,48 +164,33 @@
     </footer>
 
     <!-- JAVASCRIPT / LOGIKA PENGIRIMAN -->
-    <script>
-        function toggleIdentity(show) {
-            const fields = document.getElementById('identityFields');
-            if (show) {
-                fields.classList.remove('hidden');
-            } else {
-                fields.classList.add('hidden');
-            }
-        }
+    function handleSubmit(e) {
+    e.preventDefault();
 
-        function handleSubmit(e) {
-            e.preventDefault();
+    const sifat = document.querySelector('input[name="sifat"]:checked').value;
+    const nama = sifat === 'Anonim' ? 'Anonim (Disamarkan)' : (document.getElementById('nama').value || 'Tidak diisi');
+    const kontak = sifat === 'Anonim' ? '-' : (document.getElementById('kontak').value || 'Tidak diisi');
+    const status = document.getElementById('statusPelapor').value;
+    const kategori = document.getElementById('kategori').value;
+    const uraian = document.getElementById('uraian').value;
+    const solusi = document.getElementById('solusi').value || 'Tidak ada';
 
-            const sifat = document.querySelector('input[name="sifat"]:checked').value;
-            const nama = sifat === 'Anonim' ? 'Anonim (Disamarkan)' : (document.getElementById('nama').value || 'Tidak diisi');
-            const kontak = sifat === 'Anonim' ? '-' : (document.getElementById('kontak').value || 'Tidak diisi');
-            const status = document.getElementById('statusPelapor').value;
-            const kategori = document.getElementById('kategori').value;
-            const uraian = document.getElementById('uraian').value;
-            const solusi = document.getElementById('solusi').value || 'Tidak ada';
+    // ISI DENGAN NOMOR WA PETUGAS SEKOLAH (AWALI DENGAN 62, CONTOH: 6281234567890)
+    const noWA = "6281234567890"; 
 
-            // Format pesan WhatsApp
-            const message = `*PENGADUAN ONLINE SDN 1 SUMBER*%0A%0A` +
-                `*Sifat:* ${sifat}%0A` +
-                `*Nama:* ${nama}%0A` +
-                `*No. HP:* ${kontak}%0A` +
-                `*Status:* ${status}%0A` +
-                `*Kategori:* ${kategori}%0A%0A` +
-                `*Isi Pengaduan:*%0A${uraian}%0A%0A` +
-                `*Harapan/Solusi:*%0A${solusi}`;
+    // MENGGUNAKAN encodeURIComponent AGAR SPASI DAN ENTER DIBACA TEPAT OLEH WHATSAPP
+    const textPesan = `*PENGADUAN ONLINE SDN 1 SUMBER*\n\n` +
+        `*Sifat:* ${sifat}\n` +
+        `*Nama:* ${nama}\n` +
+        `*No. HP:* ${kontak}\n` +
+        `*Status:* ${status}\n` +
+        `*Kategori:* ${kategori}\n\n` +
+        `*Isi Pengaduan / Masukan:*\n${uraian}\n\n` +
+        `*Harapan / Solusi:*\n${solusi}`;
 
-            // Ganti nomor WhatsApp di bawah ini dengan nomor petugas sekolah asli
-            const noWA = "628980250698"; 
+    const urlWA = `https://wa.me/${noWA}?text=${encodeURIComponent(textPesan)}`;
 
-            // Buka WhatsApp
-            window.open(`https://wa.me/${noWA}?text=${message}`, '_blank');
-
-            // Reset form
-            alert('Pengaduan Anda telah disiapkan. Anda akan diarahkan ke WhatsApp Petugas Khusus SDN 1 Sumber untuk mengirim laporan.');
-            document.getElementById('complaintForm').reset();
-            toggleIdentity(true);
-        }
-    </script>
+    window.open(urlWA, '_blank');
+}
 </body>
 </html>
