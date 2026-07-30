@@ -304,11 +304,10 @@
             const solusi = document.getElementById('solusi').value || 'Tidak ada';
             const fileInput = document.getElementById('fotoBukti');
 
-            // NOMOR WA RESMI PENGELOLA SDN 1 SUMBER
             const noWA = "628980250698"; 
             let fotoUrl = "Tidak ada foto dilampirkan";
 
-            // Upload Foto jika ada
+            // UPLOAD FOTO DENGAN TIMEOUT KHUSUS HP (Max 3 Detik)
             if (fileInput.files.length > 0) {
                 btnText.innerText = "Mengunggah Foto...";
                 const formData = new FormData();
@@ -316,18 +315,23 @@
                 formData.append('upload_preset', 'ml_default');
 
                 try {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 detik timeout
+
                     const res = await fetch('https://api.cloudinary.com/v1_1/demo/image/upload', {
                         method: 'POST',
-                        body: formData
+                        body: formData,
+                        signal: controller.signal
                     });
+                    clearTimeout(timeoutId);
                     const data = await res.json();
                     if (data.secure_url) {
                         fotoUrl = data.secure_url;
                     } else {
-                        fotoUrl = "[Ada Foto Bukti dari HP]";
+                        fotoUrl = "[Foto Terlampir dari HP]";
                     }
                 } catch (err) {
-                    fotoUrl = "[Ada Foto Bukti Terlampir]";
+                    fotoUrl = "[Foto Terlampir dari HP]";
                 }
             }
 
@@ -348,7 +352,7 @@
             existingReports.push(newReport);
             localStorage.setItem('sdn1sumber_laporan', JSON.stringify(existingReports));
 
-            // KIRIM VIA WHATSAPP (MENGGUNAKAN DOMAIN WA.ME RESMI)
+            // FORMAT PESAN WA
             const textPesan = `*PENGADUAN ONLINE SDN 1 SUMBER*\n\n` +
                 `*Sifat:* ${sifat}\n` +
                 `*Nama:* ${nama}\n` +
@@ -361,12 +365,16 @@
 
             const urlWA = `https://wa.me/${noWA}?text=${encodeURIComponent(textPesan)}`;
 
+            // RESET FORM & RENDER ULANG TAMPILAN
+            document.getElementById('complaintForm').reset();
+            document.getElementById('previewContainer').classList.add('hidden');
+            loadSavedReports();
+
             btnKirim.disabled = false;
             btnText.innerText = "Kirim Pengaduan Sekarang";
 
-            // Buka WhatsApp & Reload Halaman
-            window.open(urlWA, '_blank');
-            location.reload();
+            // BUKA WHATSAPP SELESAI
+            window.location.href = urlWA;
         }
 
         window.onload = loadSavedReports;
