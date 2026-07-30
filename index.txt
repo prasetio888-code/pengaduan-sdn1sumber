@@ -196,7 +196,7 @@
                 `*Harapan/Solusi:*%0A${solusi}`;
 
             // Ganti nomor WhatsApp di bawah ini dengan nomor petugas sekolah asli
-            const noWA = "6281234567890"; 
+            const noWA = "6281802300105"; 
 
             // Buka WhatsApp
             window.open(`https://wa.me/${noWA}?text=${message}`, '_blank');
